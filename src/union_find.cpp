@@ -55,9 +55,7 @@ size_t UnionFind::find_group(size_t i) {
     }
     // compress path
     
-    if (include_children) {
-        unordered_set<size_t>& head_children = uf_nodes[i].children;
-    }
+    unordered_set<size_t>& head_children = uf_nodes[i].children;
     for (size_t p = 1; p < path.size(); p++) {
         size_t j = path[p - 1];
         uf_nodes[j].head = i;

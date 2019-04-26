@@ -28,6 +28,7 @@
 #include <unordered_set>
 #include <cstdint>
 #include <algorithm>
+#include <cassert>
 
 namespace structures {
 
