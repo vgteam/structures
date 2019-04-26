@@ -28,6 +28,7 @@
 #include <unordered_set>
 #include <cstdint>
 #include <algorithm>
+#include <cassert>
 
 namespace structures {
 
@@ -42,7 +43,8 @@ using namespace std;
 class UnionFind {
 public:
     /// Construct UnionFind for this many indices
-    UnionFind(size_t size);
+    //group() cannot be used if include_children is false
+    UnionFind(size_t size, bool include_children = true);
     
     /// Destructor
     ~UnionFind();
@@ -69,6 +71,7 @@ private:
     
     struct UFNode;
     vector<UFNode> uf_nodes;
+    bool include_children;
 };
 
 }
