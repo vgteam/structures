@@ -21,16 +21,6 @@ namespace structures {
 
 using namespace std;
 
-struct UnionFind::UFNode {
-    UFNode(size_t index) : rank(0), size(1), head(index) {}
-    ~UFNode() {}
-    
-    size_t rank;
-    size_t size;
-    size_t head;
-    unordered_set<size_t> children;
-};
-
 UnionFind::UnionFind(size_t size) {
     uf_nodes.reserve(size);
     for (size_t i = 0; i < size; i++) {

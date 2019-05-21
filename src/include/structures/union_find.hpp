@@ -71,6 +71,18 @@ private:
     vector<UFNode> uf_nodes;
 };
 
+    
+
+struct UnionFind::UFNode {
+    UFNode(size_t index) : rank(0), size(1), head(index) {}
+    ~UFNode() {}
+    
+    size_t rank;
+    size_t size;
+    size_t head;
+    unordered_set<size_t> children;
+};
+    
 }
 
 #endif /* structures_union_find_hpp */
