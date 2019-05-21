@@ -25,7 +25,7 @@
 
 #include <queue>
 #include <unordered_set>
-
+#include <functional>
 namespace structures {
 
 using namespace std;

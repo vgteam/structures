@@ -21,7 +21,7 @@ namespace structures {
 
 using namespace std;
 
-UnionFind::UnionFind(size_t size) {
+UnionFind::UnionFind(size_t size, bool include_children) : include_children(include_children) {
     uf_nodes.reserve(size);
     for (size_t i = 0; i < size; i++) {
         uf_nodes.emplace_back(i);
@@ -44,12 +44,15 @@ size_t UnionFind::find_group(size_t i) {
         i = uf_nodes[i].head;
     }
     // compress path
+    
     unordered_set<size_t>& head_children = uf_nodes[i].children;
     for (size_t p = 1; p < path.size(); p++) {
         size_t j = path[p - 1];
         uf_nodes[j].head = i;
-        uf_nodes[path[p]].children.erase(j);
-        head_children.insert(j);
+        if (include_children) {
+            uf_nodes[path[p]].children.erase(j);
+            head_children.insert(j);
+        }
     }
     // note: don't need to compress path for the final index since it
     // already points to the head
@@ -69,14 +72,18 @@ void UnionFind::union_groups(size_t i, size_t j) {
         UFNode& node_j = uf_nodes[head_j];
         if (node_i.rank > node_j.rank) {
             node_j.head = head_i;
-            node_i.children.insert(head_j);
             node_i.size += node_j.size;
+            if (include_children) {
+                node_i.children.insert(head_j);
+            }
         }
         else {
             node_i.head = head_j;
-            node_j.children.insert(head_i);
             node_j.size += node_i.size;
             
+            if (include_children) {
+                node_j.children.insert(head_i);
+            }
             if (node_j.rank == node_i.rank) {
                 node_j.rank++;
             }
@@ -89,6 +96,7 @@ size_t UnionFind::group_size(size_t i) {
 }
 
 vector<size_t> UnionFind::group(size_t i) {
+    assert(include_children);
     vector<size_t> to_return;
     // go to head of group
     vector<size_t> stack{find_group(i)};

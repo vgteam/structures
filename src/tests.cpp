@@ -439,6 +439,51 @@ vector<pair<size_t, size_t>> random_unions(size_t size) {
     return pairs;
 }
 
+void test_union_find_without_children_with_curated_examples() {
+    {
+        UnionFind union_find(10, false);
+        assert(union_find.find_group(0) != union_find.find_group(1));
+        
+        assert(union_find.group_size(0) == 1);
+        assert(union_find.group_size(1) == 1);
+        
+        union_find.union_groups(0, 1);
+        
+        assert(union_find.find_group(0) == union_find.find_group(1));
+        
+        assert(union_find.group_size(0) == 2);
+        assert(union_find.group_size(1) == 2);
+    }
+    
+    {
+        UnionFind union_find(10);
+        union_find.union_groups(0, 1);
+        union_find.union_groups(2, 3);
+        union_find.union_groups(3, 4);
+        union_find.union_groups(5, 6);
+        
+        assert(union_find.group_size(4) == 3);
+        assert(union_find.find_group(2) == union_find.find_group(3));
+        assert(union_find.find_group(5) == union_find.find_group(6));
+    }
+    
+    {
+        UnionFind union_find(10);
+        union_find.union_groups(0, 1);
+        union_find.union_groups(2, 3);
+        union_find.union_groups(3, 4);
+        union_find.union_groups(5, 6);
+        union_find.union_groups(2, 4);
+        
+        assert(union_find.group_size(4) == 3);
+        assert(union_find.find_group(2) == union_find.find_group(3));
+        assert(union_find.find_group(3) == union_find.find_group(4));
+    }
+    
+    
+    
+    cerr << "All curated UnionFind tests without children successful!" << endl;
+}
 void test_union_find_with_curated_examples() {
     {
         UnionFind union_find(10);
@@ -1314,6 +1359,7 @@ int main(void) {
     test_min_max_heap();
     test_updateable_priority_queue();
     test_union_find_with_curated_examples();
+    test_union_find_without_children_with_curated_examples();
     test_union_find_with_random_examples();
     test_suffix_tree_with_curated_examples();
     test_suffix_tree_with_randomized_examples();
