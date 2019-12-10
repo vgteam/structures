@@ -9,7 +9,7 @@ LIB = $(LIBDIR)/libstructures.a
 TESTOBJ =$(OBJDIR)/tests.o
 HEADERS = $(INCDIR)/suffix_tree.hpp $(INCDIR)/union_find.hpp $(INCDIR)/min_max_heap.hpp $(INCDIR)/immutable_list.hpp $(INCDIR)/stable_double.hpp $(INCDIR)/rank_pairing_heap.hpp
 CXX = g++
-CPPFLAGS = -std=c++11 -m64 -g -O3 -I$(INCSEARCHDIR)
+CPPFLAGS += -std=c++11 -m64 -g -O3 -I$(INCSEARCHDIR)
 
 
 all: 
@@ -20,23 +20,23 @@ clean:
 	find $(BINDIR) $(OBJDIR) $(LIBDIR) -type f -delete
 
 $(BINDIR)/test: $(TESTOBJ) $(HEADERS) $(LIB) 
-	$(CXX) $(CPPFLAGS) -o $(BINDIR)/test $(TESTOBJ) $(LIB)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $(BINDIR)/test $(TESTOBJ) $(LIB)
 
 $(OBJDIR)/suffix_tree.o: $(SRCDIR)/suffix_tree.cpp $(INCDIR)/suffix_tree.hpp
-	$(CXX) $(CPPFLAGS) -c $(SRCDIR)/suffix_tree.cpp -o $(OBJDIR)/suffix_tree.o 
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRCDIR)/suffix_tree.cpp -o $(OBJDIR)/suffix_tree.o 
 
 $(OBJDIR)/union_find.o: $(SRCDIR)/union_find.cpp $(INCDIR)/union_find.hpp
-	$(CXX) $(CPPFLAGS) -c $(SRCDIR)/union_find.cpp -o $(OBJDIR)/union_find.o 
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRCDIR)/union_find.cpp -o $(OBJDIR)/union_find.o 
 
 $(OBJDIR)/stable_double.o: $(SRCDIR)/stable_double.cpp $(INCDIR)/stable_double.hpp
-	$(CXX) $(CPPFLAGS) -c $(SRCDIR)/stable_double.cpp -o $(OBJDIR)/stable_double.o 
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRCDIR)/stable_double.cpp -o $(OBJDIR)/stable_double.o 
 
 # MinMaxHeap is header-only
 
 # RankPairingHeap is header-only
 
 $(OBJDIR)/tests.o: $(SRCDIR)/tests.cpp $(HEADERS)
-	$(CXX) $(CPPFLAGS) -c $(SRCDIR)/tests.cpp -o $(OBJDIR)/tests.o 
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(SRCDIR)/tests.cpp -o $(OBJDIR)/tests.o 
 	
 test: $(BINDIR)/test
 	./bin/test
