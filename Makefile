@@ -13,7 +13,7 @@ CPPFLAGS += -std=c++11 -m64 -g -O3 -I$(INCSEARCHDIR)
 
 
 all: 
-	make $(BINDIR)/test
+	$(MAKE) $(BINDIR)/test
 
 .PHONY: clean .pre_build
 clean:
