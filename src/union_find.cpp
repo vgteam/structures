@@ -36,6 +36,16 @@ size_t UnionFind::size() {
     return uf_nodes.size();
 }
 
+void UnionFind::resize(size_t size) {
+    size_t start_size = uf_nodes.size();
+    if (size >= start_size){
+        return;
+    }
+    for (size_t i = start_size ; i < size ; i++) {
+        uf_nodes.emplace_back(i);
+    }
+}
+
 size_t UnionFind::find_group(size_t i) {
     vector<size_t> path;
     // traverse tree upwards

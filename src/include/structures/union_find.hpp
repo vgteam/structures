@@ -51,6 +51,9 @@ public:
     
     /// Returns the number of indices in the UnionFind
     size_t size();
+
+    /// Resize by adding additional items, each in its own set. Does nothing if size is less than the current size
+    void resize(size_t size);
     
     /// Returns the group ID that index i belongs to (can change after calling union)
     size_t find_group(size_t i);
