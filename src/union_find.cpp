@@ -38,7 +38,7 @@ size_t UnionFind::size() {
 
 void UnionFind::resize(size_t size) {
     size_t start_size = uf_nodes.size();
-    if (size >= start_size){
+    if (size <= start_size){
         return;
     }
     for (size_t i = start_size ; i < size ; i++) {
