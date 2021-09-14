@@ -79,3 +79,10 @@ install(DIRECTORY src/include/structures
   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
   FILES_MATCHING PATTERN "*.hpp"
 )
+
+# Build the test executable
+add_executable(test
+  src/tests.cpp)
+target_link_libraries(test structures_shared)
+set_target_properties(test PROPERTIES OUTPUT_NAME "test")
+set_target_properties(test PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
