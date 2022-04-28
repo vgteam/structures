@@ -69,12 +69,12 @@ size_t UnionFind::find_group(size_t i) {
     return i;
 }
 
-void UnionFind::union_groups(size_t i, size_t j) {
+size_t UnionFind::union_groups(size_t i, size_t j) {
     size_t head_i = find_group(i);
     size_t head_j = find_group(j);
     if (head_i == head_j) {
         // the indices are already in the same group
-        return;
+        return head_i;
     }
     else {
         // use rank as a pivot to determine which group to make the head
@@ -86,6 +86,7 @@ void UnionFind::union_groups(size_t i, size_t j) {
             if (include_children) {
                 node_i.children.insert(head_j);
             }
+            return head_i;
         }
         else {
             node_i.head = head_j;
@@ -97,6 +98,7 @@ void UnionFind::union_groups(size_t i, size_t j) {
             if (node_j.rank == node_i.rank) {
                 node_j.rank++;
             }
+            return head_j;
         }
     }
 }

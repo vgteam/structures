@@ -59,7 +59,7 @@ public:
     size_t find_group(size_t i);
     
     /// Merges the group containing index i with the group containing index j
-    void union_groups(size_t i, size_t j);
+    size_t union_groups(size_t i, size_t j);
     
     /// Returns the size of the group containing index i
     size_t group_size(size_t i);
