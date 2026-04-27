@@ -81,8 +81,8 @@ install(DIRECTORY src/include/structures
 )
 
 # Build the test executable
-add_executable(test
+add_executable(tests
   src/tests.cpp)
-target_link_libraries(test structures_shared)
-set_target_properties(test PROPERTIES OUTPUT_NAME "test")
-set_target_properties(test PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+target_link_libraries(tests structures_shared)
+set_target_properties(tests PROPERTIES OUTPUT_NAME "tests")
+set_target_properties(tests PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
