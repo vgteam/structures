@@ -45,11 +45,8 @@ $(LIB): $(LIBOBJ)
 	rm -f $@
 	ar rs $@ $(LIBOBJ)
 
-.pre-build:
-	if [ ! -d $(BINDIR) ]; then mkdir -p $(BINDIR); fi
-	if [ ! -d $(OBJDIR) ]; then mkdir -p $(OBJDIR); fi
-	if [ ! -d $(LIBDIR) ]; then mkdir -p $(LIBDIR); fi
+$(shell if [ ! -d $(BINDIR) ]; then mkdir -p $(BINDIR); fi)
+$(shell if [ ! -d $(OBJDIR) ]; then mkdir -p $(OBJDIR); fi)
+$(shell if [ ! -d $(LIBDIR) ]; then mkdir -p $(LIBDIR); fi)
 
-# run .pre-build before we make anything at all.
--include .pre-build
 
